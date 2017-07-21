@@ -1,9 +1,8 @@
 jQuery(document).ready(function ($) {
 
+    const RESTURL = 'http://wordcampdemo.wpengine.com/wp-json/'
 
     var app = {
-        
-        restUrl : 'http://wordcampdemo.wpengine.com/wp-json/',
         
         init : function() {
             
@@ -22,7 +21,7 @@ jQuery(document).ready(function ($) {
         
         getSiteData : function() {
             
-            $.get( this.restUrl )
+            $.get( RESTURL )
                 .done( function( response ) {
                     $( '.site-title' ).html( response.name )
                     $( '.description' ).html( response.description )
@@ -35,7 +34,7 @@ jQuery(document).ready(function ($) {
         
         loadPosts : function() {
             
-            var url = this.restUrl + 'wp/v2/posts?_embed'
+            var url = RESTURL + 'wp/v2/posts?_embed'
             
             $.get( url )
                 .done( function( response ) {
@@ -59,7 +58,7 @@ jQuery(document).ready(function ($) {
         
         loadCategories : function() {
             
-            var url = this.restUrl + 'wp/v2/categories'
+            var url = RESTURL + 'wp/v2/categories'
             
             $.get( url )
                 .done( function( response ) {
@@ -84,26 +83,22 @@ jQuery(document).ready(function ($) {
         loadSinglePost : function() {
             
             var id = Math.abs( $( this ).data( 'id' ) )
-            var url = this.restUrl + '/wp/v2/posts/' + id
+            var url = RESTURL + 'wp/v2/posts/' + id + '?_embed'
             
             $.get( url )
                 .done( function( response ) {
-                    
-                    var post = {
-                        post : response
-                    }
+
                     
                     var template = $( '#single-post-template' ).html()
                     var output = $( '#main-content' )
                                         
-                    var result = Mustache.to_html( template, post )
-                    output.append( result )
+                    var result = Mustache.to_html( template, response )
+                    output.html( result )
                     
                 })
                 .fail( function() {
                     alert( 'cannot load post' )
                 })
-            
             
         }
    

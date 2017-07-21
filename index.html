@@ -29,24 +29,10 @@
         </div>
 
         <div class="row" id="content">
-            <div class="medium-8 columns" id="main-content">
-                
-                <script type="text/template" id="blog-post-template">
-                {{#posts}}
-                <div class="blog-post" data-id="{{id}}">
-                    <h3>{{title.rendered}} <small>{{date}}</small></h3>
-                    <img class="thumbnail" src="{{_embedded.wp:featuredmedia.0.source_url}}">
-                    
-                    <div class="callout">
-                        <ul class="menu simple">
-                            <li><a href="{{_embedded.author.0.link}}">Author: {{_embedded.author.0.name}}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                {{/posts}}
-                </script>
-
-            </div>
+            <!-- Main contents of the app -->
+            <div class="medium-8 columns" id="main-content"></div>
+            
+            
             <div class="medium-3 columns" data-sticky-container>
                 <div class="sticky" data-sticky data-anchor="content">
                     <h4>Categories</h4>
@@ -66,6 +52,43 @@
         <script src="includes/lib/js/jquery.min.js"></script>
         <script src="includes/lib/js/mustache.min.js"></script>
         <script src="includes/app/main.js"></script>
+        
+        <script type="text/template" id="blog-post-template">
+        {{#posts}}
+        <div class="blog-post" data-id="{{id}}">
+            <h3>{{title.rendered}} <small>{{date}}</small></h3>
+            <img class="thumbnail" src="{{_embedded.wp:featuredmedia.0.source_url}}">
+
+            <div class="callout">
+                <ul class="menu simple">
+                    <li>Author: {{_embedded.author.0.name}}</li>
+                </ul>
+            </div>
+        </div>
+        {{/posts}}
+        </script>
+
+        <script type="text/template" id="single-post-template">
+
+        <div class="blog-post" data-id="{{id}}">
+
+            <a href="index.html" class="button back-button">Go back</a>
+
+            <h3>{{title.rendered}} <small>{{date}}</small></h3>
+            <img class="thumbnail" src="{{_embedded.wp:featuredmedia.0.source_url}}">
+
+            <div>{{{content.rendered}}}</div>
+
+            <div class="callout">
+                <ul class="menu simple">
+                    <li>Author: {{_embedded.author.0.name}}</li>
+                </ul>
+            </div>
+        </div>
+
+        </script>
+
+        
         
     </body>
 </html>
