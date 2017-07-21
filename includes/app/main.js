@@ -3,13 +3,20 @@ jQuery(document).ready(function ($) {
 
     var app = {
         
-        restUrl : 'https://wordcampdemo.wpengine.com/wp-json/',
+        restUrl : 'http://wordcampdemo.wpengine.com/wp-json/',
         
         init : function() {
             
             this.getSiteData()
             this.loadPosts()
             this.loadCategories()
+            this.loadEvents()
+            
+        },
+        
+        loadEvents : function() {
+            
+            $( '#main-content' ).on( 'click', '.blog-post', this.loadSinglePost )
             
         },
         
@@ -33,13 +40,15 @@ jQuery(document).ready(function ($) {
             $.get( url )
                 .done( function( response ) {
                     
-                    var template = $( '#blog-post-template' ).html()
-                    var output = $( '#blog-roll' )
-                    
-                    for( var key in response ) {
-                        var result = Mustache.to_html( template, response[ key ] )
-                        output.append( result )
+                    var posts = {
+                        posts: response
                     }
+                    
+                    var template = $( '#blog-post-template' ).html()
+                    var output = $( '#main-content' )
+                                        
+                    var result = Mustache.to_html( template, posts )
+                    output.append( result )
                     
                 })
                 .fail( function() {
@@ -55,13 +64,15 @@ jQuery(document).ready(function ($) {
             $.get( url )
                 .done( function( response ) {
                     
+                    var categories = {
+                        categories : response
+                    }
+                    
                     var template = $( '#blog-categories-template' ).html()
                     var output = $( '#categories' )
-                    
-                    for( var key in response ) {
-                        var result = Mustache.to_html( template, response[ key ] )
-                        output.append( result )
-                    }
+                                        
+                    var result = Mustache.to_html( template, categories )
+                    output.append( result )
                     
                 })
                 .fail( function() {
@@ -69,6 +80,32 @@ jQuery(document).ready(function ($) {
                 })
             
         },
+        
+        loadSinglePost : function() {
+            
+            var id = Math.abs( $( this ).data( 'id' ) )
+            var url = this.restUrl + '/wp/v2/posts/' + id
+            
+            $.get( url )
+                .done( function( response ) {
+                    
+                    var post = {
+                        post : response
+                    }
+                    
+                    var template = $( '#single-post-template' ).html()
+                    var output = $( '#main-content' )
+                                        
+                    var result = Mustache.to_html( template, post )
+                    output.append( result )
+                    
+                })
+                .fail( function() {
+                    alert( 'cannot load post' )
+                })
+            
+            
+        }
    
         
     }

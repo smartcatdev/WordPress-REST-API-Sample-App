@@ -17,12 +17,7 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-<!--                <ul class="menu">
-                    <li><a href="#">One</a></li>
-                    <li><a href="#">Two</a></li>
-                    <li><a href="#">Three</a></li>
-                    <li><a href="#">Four</a></li>
-                </ul>-->
+
             </div>
         </div>
         <!-- End Top Bar -->
@@ -34,9 +29,10 @@
         </div>
 
         <div class="row" id="content">
-            <div class="medium-8 columns" id="blog-roll">
+            <div class="medium-8 columns" id="main-content">
                 
                 <script type="text/template" id="blog-post-template">
+                {{#posts}}
                 <div class="blog-post" data-id="{{id}}">
                     <h3>{{title.rendered}} <small>{{date}}</small></h3>
                     <img class="thumbnail" src="{{_embedded.wp:featuredmedia.0.source_url}}">
@@ -47,6 +43,7 @@
                         </ul>
                     </div>
                 </div>
+                {{/posts}}
                 </script>
 
             </div>
@@ -56,9 +53,9 @@
                     <div id="categories"></div>
                     
                     <script type="text/template" id="blog-categories-template">
-
+                    {{#categories}}
                     <div class="category">{{name}}</div>                            
-
+                    {{/categories}}
                     </script>
 
                    
@@ -66,27 +63,10 @@
             </div>
         </div>
 
-<!--        <div class="row column">
-            <ul class="pagination" aria-label="Pagination">
-                <li class="disabled">Previous</li>
-                <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
-                <li><a href="#" aria-label="Page 2">2</a></li>
-                <li><a href="#" aria-label="Page 3">3</a></li>
-                <li><a href="#" aria-label="Page 4">4</a></li>
-                <li class="ellipsis"></li>
-                <li><a href="#" aria-label="Page 12">12</a></li>
-                <li><a href="#" aria-label="Page 13">13</a></li>
-                <li><a href="#" aria-label="Next page">Next</a></li>
-            </ul>
-        </div>-->
-
         <script src="includes/lib/js/jquery.min.js"></script>
         <script src="includes/lib/js/mustache.min.js"></script>
         <script src="includes/app/main.js"></script>
-        <!--<script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>-->
-        <script>
-//            $(document).foundation();
-        </script>
+        
     </body>
 </html>
 
