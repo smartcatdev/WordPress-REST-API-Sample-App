@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-    const RESTURL = 'http://wordcampdemo.wpengine.com/wp-json/'
+    const RESTURL = 'https://wordcampdemo.wpengine.com/wp-json/'
 
     var app = {
         
@@ -15,7 +15,8 @@ jQuery(document).ready(function ($) {
         
         loadEvents : function() {
             
-            $( '#main-content' ).on( 'click', '.blog-post', this.loadSinglePost )
+            $( '#main-content' ).on( 'click', '.blog-post h3', this.loadSinglePost )
+            $( '#main-content' ).on( 'click', '.blog-post .thumbnail', this.loadSinglePost )
             
         },
         
@@ -82,7 +83,7 @@ jQuery(document).ready(function ($) {
         
         loadSinglePost : function() {
             
-            var id = Math.abs( $( this ).data( 'id' ) )
+            var id = Math.abs( $( this ).parent( '.blog-post' ).data( 'id' ) )
             var url = RESTURL + 'wp/v2/posts/' + id + '?_embed'
             
             $.get( url )
