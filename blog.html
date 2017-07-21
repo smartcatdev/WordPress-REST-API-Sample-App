@@ -13,98 +13,60 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="menu">
-                    <li class="menu-text">Yeti Agency</li>
+                    <li class="menu-text site-title">Yeti Agency</li>
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="menu">
+<!--                <ul class="menu">
                     <li><a href="#">One</a></li>
                     <li><a href="#">Two</a></li>
                     <li><a href="#">Three</a></li>
                     <li><a href="#">Four</a></li>
-                </ul>
+                </ul>-->
             </div>
         </div>
         <!-- End Top Bar -->
 
         <div class="callout large primary">
             <div class="row column text-center">
-                <h1>Our Blog</h1>
+                <h1 class="description">Our Blog</h1>
             </div>
         </div>
 
         <div class="row" id="content">
-            <div class="medium-8 columns">
-                <div class="blog-post">
-                    <h3>Awesome blog post title <small>3/6/2015</small></h3>
-                    <img class="thumbnail" src="http://placehold.it/850x350">
-                    <p>Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
+            <div class="medium-8 columns" id="blog-roll">
+                
+                <script type="text/template" id="blog-post-template">
+                <div class="blog-post" data-id="{{id}}">
+                    <h3>{{title.rendered}} <small>{{date}}</small></h3>
+                    <img class="thumbnail" src="{{_embedded.wp:featuredmedia.0.source_url}}">
+                    
                     <div class="callout">
                         <ul class="menu simple">
-                            <li><a href="#">Author: Mike Mikers</a></li>
-                            <li><a href="#">Comments: 3</a></li>
+                            <li><a href="{{_embedded.author.0.link}}">Author: {{_embedded.author.0.name}}</a></li>
                         </ul>
                     </div>
                 </div>
+                </script>
 
-                <div class="blog-post">
-                    <h3>Awesome blog post title <small>3/6/2015</small></h3>
-                    <img class="thumbnail" src="http://placehold.it/850x350">
-                    <p>Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
-                    <div class="callout">
-                        <ul class="menu simple">
-                            <li><a href="#">Author: Mike Mikers</a></li>
-                            <li><a href="#">Comments: 3</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="blog-post">
-                    <h3>Awesome blog post title <small>3/6/2015</small></h3>
-                    <img class="thumbnail" src="http://placehold.it/850x350">
-                    <p>Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
-                    <div class="callout">
-                        <ul class="menu simple">
-                            <li><a href="#">Author: Mike Mikers</a></li>
-                            <li><a href="#">Comments: 3</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="blog-post">
-                    <h3>Awesome blog post title <small>3/6/2015</small></h3>
-                    <img class="thumbnail" src="http://placehold.it/850x350">
-                    <p>Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
-                    <div class="callout">
-                        <ul class="menu simple">
-                            <li><a href="#">Author: Mike Mikers</a></li>
-                            <li><a href="#">Comments: 3</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
             <div class="medium-3 columns" data-sticky-container>
                 <div class="sticky" data-sticky data-anchor="content">
                     <h4>Categories</h4>
-                    <ul>
-                        <li><a href="#">Skyler</a></li>
-                        <li><a href="#">Jesse</a></li>
-                        <li><a href="#">Mike</a></li>
-                        <li><a href="#">Holly</a></li>
-                    </ul>
+                    <div id="categories"></div>
+                    
+                    <script type="text/template" id="blog-categories-template">
 
-                    <h4>Authors</h4>
-                    <ul>
-                        <li><a href="#">Skyler</a></li>
-                        <li><a href="#">Jesse</a></li>
-                        <li><a href="#">Mike</a></li>
-                        <li><a href="#">Holly</a></li>
-                    </ul>
+                    <div class="category">{{name}}</div>                            
+
+                    </script>
+
+                   
                 </div>
             </div>
         </div>
 
-        <div class="row column">
+<!--        <div class="row column">
             <ul class="pagination" aria-label="Pagination">
                 <li class="disabled">Previous</li>
                 <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
@@ -116,14 +78,14 @@
                 <li><a href="#" aria-label="Page 13">13</a></li>
                 <li><a href="#" aria-label="Next page">Next</a></li>
             </ul>
-        </div>
+        </div>-->
 
         <script src="includes/lib/js/jquery.min.js"></script>
         <script src="includes/lib/js/mustache.min.js"></script>
         <script src="includes/app/main.js"></script>
-        <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        <!--<script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>-->
         <script>
-            $(document).foundation();
+//            $(document).foundation();
         </script>
     </body>
 </html>
