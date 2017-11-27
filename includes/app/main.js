@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-    const RESTURL = 'https://wordcampdemo.wpengine.com/wp-json/'
+    const RESTURL = 'https://wptavern.com/wp-json/'
 
     var app = {
         
